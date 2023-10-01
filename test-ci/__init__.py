@@ -1,3 +1,3 @@
 
 __URL__ = "https://github.com/haeussma/test-ci.git"
-__COMMIT__ = "3dba73523b4b2857394f08905522aedb4723b124"
+__COMMIT__ = "026ae4d5f328f20662eb3e6226c4acbd299b36e6"

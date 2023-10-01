@@ -29,5 +29,5 @@ class Step(sdRDM.DataModel):
         default="https://github.com/haeussma/test-ci.git"
     )
     __commit__: Optional[str] = PrivateAttr(
-        default="3dba73523b4b2857394f08905522aedb4723b124"
+        default="026ae4d5f328f20662eb3e6226c4acbd299b36e6"
     )
