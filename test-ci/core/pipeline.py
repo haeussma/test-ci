@@ -34,3 +34,8 @@ class Pipeline(sdRDM.DataModel):
     __commit__: Optional[str] = PrivateAttr(
         default="3dba73523b4b2857394f08905522aedb4723b124"
     )
+
+    def print_name(self):
+        print(self.name)
+
+
