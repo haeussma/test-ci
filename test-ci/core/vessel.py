@@ -1,7 +1,7 @@
 import sdRDM
 
 from typing import Optional
-from pydantic import Field, PositiveFloat, StrictBool
+from pydantic import Field, PositiveFloat, PrivateAttr, StrictBool
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
@@ -46,4 +46,10 @@ class Vessel(sdRDM.DataModel):
     creator_id: Optional[str] = Field(
         default=None,
         description="Unique identifier of the author.",
+    )
+    __repo__: Optional[str] = PrivateAttr(
+        default="https://github.com/haeussma/test-ci.git"
+    )
+    __commit__: Optional[str] = PrivateAttr(
+        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
     )

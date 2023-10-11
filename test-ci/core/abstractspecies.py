@@ -1,7 +1,7 @@
 import sdRDM
 
 from typing import Optional, Union
-from pydantic import Field, StrictBool, validator
+from pydantic import PrivateAttr, Field, validator, StrictBool
 from sdRDM.base.utils import forge_signature, IDGenerator
 from .vessel import Vessel
 
@@ -51,6 +51,26 @@ class AbstractSpecies(sdRDM.DataModel):
         default=None,
         description="None",
     )
+    __repo__: Optional[str] = PrivateAttr(
+        default="https://github.com/haeussma/test-ci.git"
+    )
+    __commit__: Optional[str] = PrivateAttr(
+        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
+    )
+
+    @validator("vessel_id")
+    def get_vessel_id_reference(cls, value):
+        """Extracts the ID from a given object to create a reference"""
+        from .vessel import Vessel
+
+        if isinstance(value, Vessel):
+            return value.id
+        elif isinstance(value, str):
+            return value
+        else:
+            raise TypeError(
+                f"Expected types [Vessel, str] got '{type(value).__name__}' instead."
+            )
 
     @validator("vessel_id")
     def get_vessel_id_reference(cls, value):

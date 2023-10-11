@@ -111,7 +111,7 @@ classDiagram
     
     class https://github.com/EnzymeML/enzymeml-specifications.git {
         << External Object >>
-        +Repository <sdRDM.markdown.markdownparser.MarkdownParser object at 0x110979150>
+        +Repository <sdRDM.markdown.markdownparser.MarkdownParser object at 0x7fba877a91c0>
     }
     
 ```

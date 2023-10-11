@@ -1,7 +1,7 @@
 import sdRDM
 
 from typing import List, Optional
-from pydantic import Field, StrictBool
+from pydantic import Field, PrivateAttr, StrictBool
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 from lmfit import Parameters, report_fit
@@ -33,6 +33,12 @@ class Step(sdRDM.DataModel):
         description="Species of the step",
         default_factory=ListPlus,
         multiple=True,
+    )
+    __repo__: Optional[str] = PrivateAttr(
+        default="https://github.com/haeussma/test-ci.git"
+    )
+    __commit__: Optional[str] = PrivateAttr(
+        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
     )
 
     def add_to_species(

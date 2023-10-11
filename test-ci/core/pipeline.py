@@ -1,7 +1,7 @@
 import sdRDM
 
 from typing import List, Optional
-from pydantic import Field
+from pydantic import Field, PrivateAttr
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 from .abstractspecies import AbstractSpecies
@@ -32,6 +32,12 @@ class Pipeline(sdRDM.DataModel):
     max_length: Optional[int] = Field(
         default=None,
         description="Maximum length of the pipeline",
+    )
+    __repo__: Optional[str] = PrivateAttr(
+        default="https://github.com/haeussma/test-ci.git"
+    )
+    __commit__: Optional[str] = PrivateAttr(
+        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
     )
 
     def add_to_steps(
