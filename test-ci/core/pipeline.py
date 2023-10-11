@@ -1,16 +1,16 @@
 import sdRDM
 
-from typing import Optional
-from pydantic import Field, PrivateAttr
+from typing import List, Optional
+from pydantic import Field
+from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
-
-
+from .abstractspecies import AbstractSpecies
 from .step import Step
 
 
 @forge_signature
 class Pipeline(sdRDM.DataModel):
-    """"""
+    """This is the definition of a pipeline."""
 
     id: Optional[str] = Field(
         description="Unique identifier of the given object.",
@@ -18,19 +18,40 @@ class Pipeline(sdRDM.DataModel):
         xml="@id",
     )
 
-    name: Optional[str] = Field(
-        default=None,
+    name: str = Field(
+        ...,
         description="Name of the pipeline",
     )
 
-    steps: Optional[Step] = Field(
-        default=Step(),
-        description="Steps of the pipeline",
+    steps: List[Step] = Field(
+        description="List of steps in the pipeline",
+        default_factory=ListPlus,
+        multiple=True,
     )
 
-    __repo__: Optional[str] = PrivateAttr(
-        default="https://github.com/haeussma/test-ci.git"
+    max_length: Optional[int] = Field(
+        default=None,
+        description="Maximum length of the pipeline",
     )
-    __commit__: Optional[str] = PrivateAttr(
-        default="026ae4d5f328f20662eb3e6226c4acbd299b36e6"
-    )
+
+    def add_to_steps(
+        self,
+        name: str,
+        required: bool,
+        species: List[AbstractSpecies] = ListPlus(),
+        id: Optional[str] = None,
+    ) -> None:
+        """
+        This method adds an object of type 'Step' to attribute steps
+
+        Args:
+            id (str): Unique identifier of the 'Step' object. Defaults to 'None'.
+            name (): Name of the pipeline.
+            required (): True, if step is required for the pipeline.
+            species (): Species of the step. Defaults to ListPlus()
+        """
+        params = {"name": name, "required": required, "species": species}
+        if id is not None:
+            params["id"] = id
+        self.steps.append(Step(**params))
+        return self.steps[-1]

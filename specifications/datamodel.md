@@ -3,17 +3,31 @@
 ## Objects
 
 ### Pipeline
-- name
+
+This is the definition of a pipeline.
+
+- __name__
   - Type: string
   - Description: Name of the pipeline
 - steps
   - Type: Step
-  - Description: Steps of the pipeline
+  - Description: List of steps in the pipeline
+  - Multiple: True
+- max_length
+  - Type: int
+  - Description: Maximum length of the pipeline
 
 ### Step
-- name
+
+This is the definition of a step.
+
+- __name__
   - Type: string
   - Description: Name of the pipeline
-- required
+- __required__
   - Type: bool
   - Description: True, if step is required for the pipeline
+- species
+    - Type: https://github.com/EnzymeML/enzymeml-specifications.git@AbstractSpecies,
+    - Description: Species of the step
+    - Multiple: True
