@@ -5,8 +5,8 @@ from pydantic import Field, PrivateAttr, StrictBool
 from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 from lmfit import Parameters, report_fit
-from .abstractspecies import AbstractSpecies
 from .vessel import Vessel
+from .abstractspecies import AbstractSpecies
 
 
 @forge_signature
@@ -29,6 +29,12 @@ class Step(sdRDM.DataModel):
         description="True, if step is required for the pipeline",
     )
 
+    new_attr: List[float] = Field(
+        description="New test attr",
+        default_factory=ListPlus,
+        multiple=True,
+    )
+
     species: List[AbstractSpecies] = Field(
         description="Species of the step",
         default_factory=ListPlus,
@@ -38,7 +44,7 @@ class Step(sdRDM.DataModel):
         default="https://github.com/haeussma/test-ci.git"
     )
     __commit__: Optional[str] = PrivateAttr(
-        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
+        default="b6632df838b334faea009f667f5f4bf7df999ee3"
     )
 
     def add_to_species(

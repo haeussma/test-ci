@@ -37,13 +37,14 @@ class Pipeline(sdRDM.DataModel):
         default="https://github.com/haeussma/test-ci.git"
     )
     __commit__: Optional[str] = PrivateAttr(
-        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
+        default="b6632df838b334faea009f667f5f4bf7df999ee3"
     )
 
     def add_to_steps(
         self,
         name: str,
         required: bool,
+        new_attr: List[float] = ListPlus(),
         species: List[AbstractSpecies] = ListPlus(),
         id: Optional[str] = None,
     ) -> None:
@@ -54,9 +55,15 @@ class Pipeline(sdRDM.DataModel):
             id (str): Unique identifier of the 'Step' object. Defaults to 'None'.
             name (): Name of the pipeline.
             required (): True, if step is required for the pipeline.
+            new_attr (): New test attr. Defaults to ListPlus()
             species (): Species of the step. Defaults to ListPlus()
         """
-        params = {"name": name, "required": required, "species": species}
+        params = {
+            "name": name,
+            "required": required,
+            "new_attr": new_attr,
+            "species": species,
+        }
         if id is not None:
             params["id"] = id
         self.steps.append(Step(**params))

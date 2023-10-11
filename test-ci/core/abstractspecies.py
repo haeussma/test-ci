@@ -55,8 +55,22 @@ class AbstractSpecies(sdRDM.DataModel):
         default="https://github.com/haeussma/test-ci.git"
     )
     __commit__: Optional[str] = PrivateAttr(
-        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
+        default="b6632df838b334faea009f667f5f4bf7df999ee3"
     )
+
+    @validator("vessel_id")
+    def get_vessel_id_reference(cls, value):
+        """Extracts the ID from a given object to create a reference"""
+        from .vessel import Vessel
+
+        if isinstance(value, Vessel):
+            return value.id
+        elif isinstance(value, str):
+            return value
+        else:
+            raise TypeError(
+                f"Expected types [Vessel, str] got '{type(value).__name__}' instead."
+            )
 
     @validator("vessel_id")
     def get_vessel_id_reference(cls, value):

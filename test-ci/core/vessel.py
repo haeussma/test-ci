@@ -51,5 +51,5 @@ class Vessel(sdRDM.DataModel):
         default="https://github.com/haeussma/test-ci.git"
     )
     __commit__: Optional[str] = PrivateAttr(
-        default="6ce3825271a80a3e70440b0c1aeec884a5d77c1f"
+        default="b6632df838b334faea009f667f5f4bf7df999ee3"
     )

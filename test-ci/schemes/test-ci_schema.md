@@ -42,6 +42,7 @@ classDiagram
     class Step {
         +string name*
         +bool required*
+        +float[0..*] new_attr
         +AbstractSpecies[0..*] species
     }
     
@@ -111,7 +112,7 @@ classDiagram
     
     class https://github.com/EnzymeML/enzymeml-specifications.git {
         << External Object >>
-        +Repository <sdRDM.markdown.markdownparser.MarkdownParser object at 0x7fba877a91c0>
+        +Repository <sdRDM.markdown.markdownparser.MarkdownParser object at 0x7fd329615220>
     }
     
 ```
